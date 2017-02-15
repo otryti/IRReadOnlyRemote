@@ -227,13 +227,7 @@ static void irISR() {
 	unsigned long duration;
 
 	unsigned long now = micros();
-	if (now > lastInterrupt) {
-		duration = now - lastInterrupt;
-	} else {
-		// The microsecond timer has rolled over - happens every 70 minutes on a 16 MHz board.
-		duration = 0xffffffff - lastInterrupt;
-		duration += now + 1;
-	}
+	duration = now - lastInterrupt;
 	lastInterrupt = now;
 
 	uint8_t  irPinState = (uint8_t)digitalRead(interruptPin);
